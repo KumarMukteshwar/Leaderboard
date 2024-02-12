@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      width: 300px;
+      margin: 50px auto;
+      text-align: center;
+    }
+    .score {
+      font-size: 24px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .numbers {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .number {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+    }
+    .enter-button {
+      font-size: 16px;
+      padding: 8px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .enter-button:hover {
+      background-color: #45a049;
+    }
+    .minmax {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Leaderboard</h2>
+    <div class="score" id="score"></div>
+    <div class="numbers">
+      <div class="number" onclick="addNumber(1)">1</div>
+      <div class="number" onclick="addNumber(2)">2</div>
+      <div class="number" onclick="addNumber(3)">3</div>
+    </div>
+    <div class="numbers">
+      <div class="number" onclick="addNumber(4)">4</div>
+      <div class="number" onclick="addNumber(5)">5</div>
+      <div class="number" onclick="addNumber(6)">6</div>
+    </div>
+    <div class="numbers">
+      <div class="number" onclick="addNumber(7)">7</div>
+      <div class="number" onclick="addNumber(8)">8</div>
+      <div class="number" onclick="addNumber(9)">9</div>
+    </div>
+    <button class="enter-button" onclick="updateScore()">ENTER</button>
+    <div class="minmax">
+      <div>MIN: <span id="min">-</span></div>
+      <div>MAX: <span id="max">-</span></div>
+    </div>
+  </div>
+
+  <script>
+    let scoreValue = ' ';
+
+    function addNumber(number) {
+      scoreValue += number;
+      document.getElementById('score').innerText = scoreValue;
+    }
+
+    function updateScore() {
+      const score = parseInt(scoreValue);
+      const minScoreElement = document.getElementById('min');
+      const maxScoreElement = document.getElementById('max');
+      let minScore = parseInt(minScoreElement.innerText);
+      let maxScore = parseInt(maxScoreElement.innerText);
+
+      if (scoreValue === '') {
+        return;
+      }
+
+      if (isNaN(minScore) || score < minScore) {
+        minScore = score;
+        minScoreElement.innerText = minScore;
+      }
+
+      if (isNaN(maxScore) || score > maxScore) {
+        maxScore = score;
+        maxScoreElement.innerText = maxScore;
+      }
+
+      scoreValue = '';
+      document.getElementById('score').innerText = '';
+    }
+  </script>
+</body>
+</html>
